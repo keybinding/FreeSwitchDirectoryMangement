@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  tttt:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "32760:80"

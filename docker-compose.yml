@@ -1,0 +1,34 @@
+version: '3.4'
+
+services:
+  tttt:
+    image: ${DOCKER_REGISTRY-}tttt
+    build:
+      context: .
+      dockerfile: TTTT/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "32760:80"
+
+  rabbit:
+    image: "rabbitmq:3-management"
+    hostname: "rabbit"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
+  postgres:
+    image: "postgres"
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+
+volumes:
+  db-data:
